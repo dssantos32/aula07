@@ -4,35 +4,41 @@ Semestre: 6º semnestre - Aula 07.
 Polo: Alto Aparnaiba - MA -->
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <title>Calculo de IMC</title>
-  </head>
-  <body>
+</head>
+
+<body>
     <h1>Calculo de IMC</h1>
     <?php
-      if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $nome = $_POST["nome"];
         $peso = $_POST["peso"];
         $altura = $_POST["altura"];
 
         $imc = $peso / ($altura * $altura);
-        echo "<p>Seu IMC é: " . number_format($imc, 2) . "</p>";
+        echo "<p>" . $nome . ", seu IMC é: " . number_format($imc, 2) . "</p>";
 
         if ($imc < 18.5) {
-          echo "<p>Você está abaixo do peso ideal.</p>";
+            echo "<p>Você está abaixo do peso ideal.</p>";
         } elseif ($imc >= 18.5 && $imc < 25) {
-          echo "<p>Parabéns! Você está em seu peso normal.</p>";
+            echo "<p>Parabéns! Você está em seu peso normal.</p>";
         } elseif ($imc >= 25 && $imc < 30) {
-          echo "<p>Você está acima de seu peso (sobrepeso).</p>";
+            echo "<p>Você está acima de seu peso (sobrepeso).</p>";
         } elseif ($imc >= 30 && $imc < 35) {
-          echo "<p>Você está com obesidade grau I.</p>";
+            echo "<p>Você está com obesidade grau I.</p>";
         } elseif ($imc >= 35 && $imc < 40) {
-          echo "<p>Você está com obesidade grau II.</p>";
+            echo "<p>Você está com obesidade grau II.</p>";
         } else {
-          echo "<p>Você está com obesidade grau III (obesidade mórbida).</p>";
+            echo "<p>Você está com obesidade grau III (obesidade mórbida).</p>";
         }
-      }
+    }
     ?>
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+      <label for="nome">Nome:</label>
+      <input type="text" name="nome" id="nome" required>
+      <br><br>
       <label for="peso">Peso (em kg):</label>
       <input type="number" name="peso" id="peso" required>
       <br><br>
